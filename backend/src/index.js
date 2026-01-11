@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const authRoutes = require('./routes/auth.route');
 const userRoutes = require('./routes/user.route');
+const attendanceRoutes = require('./routes/attendance.route');
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/attendance', attendanceRoutes);
 
 app.get('/', (req, res) => {
   res.send('HRIS Backend API is Running...🚀');

@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  binaryTargets = ["native", "linux-musl"]
+  binaryTargets = ["debian-openssl-3.0.x"]
 }
 
 datasource db {
@@ -62,8 +62,10 @@ model Attendance {
   type        AttendanceType
   timestamp   DateTime       @default(now())
   photo_path  String
-  latitude    Float
-  longitude   Float
+  clockIn     DateTime      @default(now())
+  clockOut    DateTime?
+  latitude    Float?
+  longitude   Float?
   status      String
 }
 
