@@ -4,6 +4,7 @@ const cors = require('cors');
 const authRoutes = require('./routes/auth.route');
 const userRoutes = require('./routes/user.route');
 const attendanceRoutes = require('./routes/attendance.route');
+const path = require('path');
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/attendance', attendanceRoutes);
