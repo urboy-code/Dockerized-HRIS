@@ -5,7 +5,7 @@ exports.clockIn = async (req, res) => {
   try {
     const { latitude, longitude } = req.body;
     const photo = req.file;
-    const user_id = 1;
+    const user_id = req.user.id;
 
     if (!photo) {
       return res.status(400).json({ message: 'Photo are required' });
@@ -39,7 +39,7 @@ exports.clockIn = async (req, res) => {
 
 exports.clockOut = async (req, res) => {
   try {
-    const user_id = 1;
+    const user_id = req.user.id;
 
     const activeSession = await prisma.attendance.findFirst({
       where: { user_id: user_id, clockOut: null },
@@ -67,7 +67,7 @@ exports.clockOut = async (req, res) => {
 exports.getHistory = async (req, res) => {
   try {
     const history = await prisma.attendance.findMany({
-      where: { user_id: 1 },
+      where: { user_id: req.user.id },
       orderBy: { clockIn: 'desc' },
       take: 10,
     });
